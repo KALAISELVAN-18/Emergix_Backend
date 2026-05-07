@@ -21,7 +21,7 @@ exports.registerAdmin = async (req, res) => {
 
     await admin.save();
 
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET || 'your_jwt_secret_key_here', { expiresIn: '7d' });
 
     res.status(201).json({
       success: true,
@@ -60,7 +60,7 @@ exports.loginAdmin = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET || 'your_jwt_secret_key_here', { expiresIn: '7d' });
 
     res.json({
       success: true,
